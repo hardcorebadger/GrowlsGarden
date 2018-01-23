@@ -11,6 +11,22 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1991348160728196}
   m_IsPrefabParent: 1
+--- !u!1 &1106609715321606
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4987226662499612}
+  - component: {fileID: 135924945351869076}
+  m_Layer: 0
+  m_Name: GameObject (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
 --- !u!1 &1364131145720680
 GameObject:
   m_ObjectHideFlags: 0
@@ -20,6 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4112927355190912}
   - component: {fileID: 65844935331312718}
+  - component: {fileID: 114773320894028024}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -102,8 +119,22 @@ Transform:
   m_Children:
   - {fileID: 4193445985834678}
   - {fileID: 4112927355190912}
+  - {fileID: 4987226662499612}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4987226662499612
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1106609715321606}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4596166357670174}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23811895100247900
 MeshRenderer:
@@ -202,6 +233,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114773320894028024
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1364131145720680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114913947348931208
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -217,6 +259,20 @@ MonoBehaviour:
   HoldingRotation: {x: 0, y: -90, z: 0}
   PlacementOffset: {x: 0, y: 0, z: 0}
   PlacementRotation: {x: 0, y: -90, z: 0}
+  CheckRadius: 0.6452332
+  CheckOffset: {x: 0.20578, y: 0.7797242, z: 0}
+--- !u!135 &135924945351869076
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1106609715321606}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.64523315
+  m_Center: {x: 0.20578003, y: 0.77972424, z: 0}
 --- !u!136 &136818370212274578
 CapsuleCollider:
   m_ObjectHideFlags: 1

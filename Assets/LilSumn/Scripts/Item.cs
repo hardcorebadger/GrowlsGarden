@@ -10,13 +10,6 @@ public class Item : MonoBehaviour {
 	public Vector3 PlacementOffset;
 	public Vector3 PlacementRotation;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	public float CheckRadius;
+	public Vector3 CheckOffset;
 }

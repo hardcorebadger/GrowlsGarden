@@ -11,6 +11,8 @@ public class GameController : MonoBehaviour {
 	public float ThrowSpeed;
 	public float ItemMovementSpeed;
 
+	public GameObject TerraformParticles;
+
 	public int PaintRadius = 5;
 
 	private Terrain _terrain;
@@ -27,6 +29,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void PaintRoad(Vector3 pos) {
+		Instantiate (TerraformParticles, pos, Quaternion.Euler(new Vector3 (-90, 0, 0)));
 		int x = Mathf.RoundToInt(((pos.x - _terrain.transform.position.x) / _terrain.terrainData.size.x) * _terrain.terrainData.heightmapWidth);
 		int y = Mathf.RoundToInt(((pos.z - _terrain.transform.position.z) / _terrain.terrainData.size.z) * _terrain.terrainData.heightmapHeight);
 		float[,,] splatmap = _terrain.terrainData.GetAlphamaps(x-PaintRadius,y-PaintRadius,PaintRadius*2,PaintRadius*2);
