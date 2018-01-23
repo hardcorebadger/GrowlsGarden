@@ -29,7 +29,7 @@ public class Player : MonoBehaviour {
 
 		if (_itemInHand != null) {
 			// put down the item
-			PutDown (hit.point);
+			StartCoroutine(PlaceItem (hit.point));
 		} else {
 			// process chests
 			Chest chest = _gc.GetTopParent (g).GetComponent<Chest>();
@@ -40,7 +40,7 @@ public class Player : MonoBehaviour {
 
 			// process items
 			if (g.tag == "item") {
-				Pickup (_gc.GetTopParent (g));
+				StartCoroutine(PickupItem (_gc.GetTopParent (g)));
 				return;
 			}
 
@@ -85,6 +85,42 @@ public class Player : MonoBehaviour {
 		if (r != null)
 			r.isKinematic = false;
 		r.velocity = Camera.main.transform.forward * _gc.ThrowSpeed;
+		_itemInHand = null;
+	}
+
+	private IEnumerator PickupItem(GameObject g) {
+		_itemInHand = g;
+		g.transform.parent = Hand.transform;
+		Rigidbody r = g.GetComponent<Rigidbody> ();
+		Item item = g.GetComponent<Item> ();
+		Vector3 initialPos = g.transform.localPosition;
+		Quaternion initialRot = g.transform.localRotation;
+		float p = 0f;
+		while (p < 1f) {
+			p += _gc.ItemMovementSpeed * Time.deltaTime;
+			item.transform.localPosition = Vector3.Lerp (initialPos, item.HoldingOffset, p);
+			item.transform.localRotation = Quaternion.Lerp (initialRot, Quaternion.Euler (item.HoldingRotation), p);
+			yield return null;
+		}
+		r.isKinematic = true;
+	}
+
+	private IEnumerator PlaceItem(Vector3 pos) {
+		GameObject g = _itemInHand;
+		g.transform.parent = null;
+		Rigidbody r = g.GetComponent<Rigidbody> ();
+		Item item = g.GetComponent<Item> ();
+		Vector3 initialPos = g.transform.position;
+		Quaternion initialRot = g.transform.rotation;
+		Quaternion targetRot = Quaternion.Euler(new Vector3 (item.PlacementRotation.x, item.PlacementRotation.y+transform.eulerAngles.y, item.PlacementRotation.z));
+		float p = 0f;
+		while (p < 1f) {
+			p += _gc.ItemMovementSpeed * Time.deltaTime;
+			item.transform.position = Vector3.Lerp (initialPos, pos + item.PlacementOffset, p);
+			item.transform.rotation = Quaternion.Lerp (initialRot, targetRot, p);
+			yield return null;
+		}
+		r.isKinematic = false;
 		_itemInHand = null;
 	}
 }

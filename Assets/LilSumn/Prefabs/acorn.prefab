@@ -39,6 +39,8 @@ GameObject:
   - component: {fileID: 4949094418967846}
   - component: {fileID: 135299753606176160}
   - component: {fileID: 54507783622551912}
+  - component: {fileID: 114365931926516646}
+  - component: {fileID: 114230250981799376}
   m_Layer: 0
   m_Name: acorn
   m_TagString: item
@@ -66,7 +68,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1399556220368642}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 262.7, y: 11.45, z: 228.42}
+  m_LocalPosition: {x: 291.5279, y: 8.41946, z: 299.23804}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4879724208575318}
@@ -146,6 +148,36 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114230250981799376
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1399556220368642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19a4c0dd008de4663881647e395e1380, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HoldingOffset: {x: 0, y: 0, z: 0}
+  HoldingRotation: {x: 0, y: 0, z: 0}
+  PlacementOffset: {x: 0, y: 0, z: 0}
+  PlacementRotation: {x: 0, y: 0, z: 0}
+--- !u!114 &114365931926516646
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1399556220368642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19a4c0dd008de4663881647e395e1380, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HoldingOffset: {x: 0, y: 0, z: 0}
+  HoldingRotation: {x: -90, y: 0, z: 0}
+  PlacementOffset: {x: 0, y: 0.4, z: 0}
+  PlacementRotation: {x: -90, y: 0, z: 0}
 --- !u!135 &135299753606176160
 SphereCollider:
   m_ObjectHideFlags: 1

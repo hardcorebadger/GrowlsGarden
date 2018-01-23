@@ -9,6 +9,8 @@ public class GameController : MonoBehaviour {
 	public GameObject Pointer;
 	public float ArmLength;
 	public float ThrowSpeed;
+	public float ItemMovementSpeed;
+
 	public int PaintRadius = 5;
 
 	private Terrain _terrain;
