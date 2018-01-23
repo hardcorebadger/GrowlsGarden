@@ -10,6 +10,7 @@ GameObject:
   - component: {fileID: 477854}
   - component: {fileID: 3300476}
   - component: {fileID: 2361308}
+  - component: {fileID: 64957435682501272}
   m_Layer: 0
   m_Name: Stone_6
   m_TagString: Untagged
@@ -23,9 +24,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 118688}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.8044369, y: -0.08730409, z: -0.063397564, w: 0.5841575}
+  m_LocalPosition: {x: 250.26778, y: 11.994141, z: 311.07166}
+  m_LocalScale: {x: 5.1043897, y: 5.104391, z: 5.10439}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -82,3 +83,17 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 118688}
   m_IsPrefabParent: 1
+--- !u!64 &64957435682501272
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 118688}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: a00a189e59931a5418fd1112fd9e4c3d, type: 3}
