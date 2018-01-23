@@ -28,8 +28,10 @@ public class GameController : MonoBehaviour {
 		int x = Mathf.RoundToInt(((pos.x - _terrain.transform.position.x) / _terrain.terrainData.size.x) * _terrain.terrainData.heightmapWidth);
 		int y = Mathf.RoundToInt(((pos.z - _terrain.transform.position.z) / _terrain.terrainData.size.z) * _terrain.terrainData.heightmapHeight);
 		float[,,] splatmap = _terrain.terrainData.GetAlphamaps(x-PaintRadius,y-PaintRadius,PaintRadius*2,PaintRadius*2);
-		int[,] details0 = _terrain.terrainData.GetDetailLayer (x - PaintRadius, y - PaintRadius, (PaintRadius * 2), (PaintRadius * 2), 0);
-		int[,] details1 = _terrain.terrainData.GetDetailLayer (x - PaintRadius, y - PaintRadius, (PaintRadius * 2), (PaintRadius * 2), 1);
+		int dx = Mathf.RoundToInt(((pos.x - _terrain.transform.position.x) / _terrain.terrainData.size.x) * _terrain.terrainData.detailWidth);
+		int dy = Mathf.RoundToInt(((pos.z - _terrain.transform.position.z) / _terrain.terrainData.size.z) * _terrain.terrainData.detailHeight);
+		int[,] details0 = _terrain.terrainData.GetDetailLayer (dx - PaintRadius, dy - PaintRadius, (PaintRadius * 2), (PaintRadius * 2), 0);
+		int[,] details1 = _terrain.terrainData.GetDetailLayer (dx - PaintRadius, dy - PaintRadius, (PaintRadius * 2), (PaintRadius * 2), 1);
 		for (int xi = 0; xi < splatmap.GetLength(0); xi++) {
 			for (int yi = 0; yi < splatmap.GetLength(1); yi++) {
 				int p =  Mathf.RoundToInt(Mathf.Sqrt(Mathf.Pow(PaintRadius,2) - (Mathf.Pow (xi - PaintRadius, 2) + Mathf.Pow (yi - PaintRadius, 2))));
@@ -46,8 +48,8 @@ public class GameController : MonoBehaviour {
 		}
 
 		_terrain.terrainData.SetAlphamaps (x-PaintRadius,y-PaintRadius,splatmap);
-		_terrain.terrainData.SetDetailLayer(x-PaintRadius,y-PaintRadius, 0, details0);
-		_terrain.terrainData.SetDetailLayer(x-PaintRadius,y-PaintRadius, 1, details1);
+		_terrain.terrainData.SetDetailLayer(dx-PaintRadius,dy-PaintRadius, 0, details0);
+		_terrain.terrainData.SetDetailLayer(dx-PaintRadius,dy-PaintRadius, 1, details1);
 
 	}
 }

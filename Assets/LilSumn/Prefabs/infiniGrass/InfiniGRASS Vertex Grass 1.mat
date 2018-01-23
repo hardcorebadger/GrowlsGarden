@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: InfiniGRASS Vertex Grass
+  m_Name: InfiniGRASS Vertex Grass 1
   m_Shader: {fileID: 4800000, guid: 7f36975409847224380d82b064ab191c, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
