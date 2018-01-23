@@ -21,35 +21,37 @@ public class Player : MonoBehaviour {
 		if (Input.GetMouseButtonDown (0)) {
 			RaycastHit hit = GetHit();
 			if (hit.transform != null)
-				Interact (hit.transform.gameObject, hit);
+				LeftClick (hit.transform.gameObject, hit);
+		}
+		if (Input.GetMouseButtonDown (1)) {
+			RaycastHit hit = GetHit();
+			if (hit.transform != null)
+				RightClick (hit.transform.gameObject, hit);
 			else if (_itemInHand != null)
 				ThrowItem();
 		}
 	}
 
-	private void Interact(GameObject g, RaycastHit hit) {
-
-		if (_itemInHand != null) {
-			// put down the item
-			StartCoroutine(PlaceItem (hit.point));
-		} else {
+	private void RightClick(GameObject g, RaycastHit hit) {
+		if (_itemInHand == null || !_itemInHand.GetComponent<Item>().Use(g,hit)) {
 			// process chests
 			Chest chest = _gc.GetTopParent (g).GetComponent<Chest>();
 			if (chest != null) {
 				chest.ToggleOpen ();
 				return;
 			}
+		}
+	}
 
-			// process items
-			if (g.tag == "item") {
+	private void LeftClick(GameObject g, RaycastHit hit) {
+
+		if (_itemInHand != null) {
+			// place the item
+			StartCoroutine(PlaceItem (hit.point));
+		} else {
+			// pickup item
+			if (g.tag == "item")
 				StartCoroutine(PickupItem (_gc.GetTopParent (g)));
-				return;
-			}
-
-			// process terraform
-			if (g.layer == 8) {
-				_gc.PaintRoad (hit.point);
-			}
 		}
 
 	}
@@ -58,6 +60,14 @@ public class Player : MonoBehaviour {
 		RaycastHit hit;
 		Physics.Raycast (Camera.main.ScreenPointToRay(_gc.Pointer.transform.position), out hit, _gc.ArmLength, LayerMask.GetMask (new string[]{ "Default", "Terrain" }));
 		return hit;
+	}
+
+
+	public void Terraform(GameObject g, RaycastHit h) {
+		// process terraform
+		if (g.layer == 8) {
+			_gc.PaintRoad (h.point);
+		}
 	}
 
 	private void ThrowItem() {
