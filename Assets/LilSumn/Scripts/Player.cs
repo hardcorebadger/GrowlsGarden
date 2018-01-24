@@ -12,6 +12,9 @@ public class Player : MonoBehaviour {
 	private Animator _handAnimator;
 	private CharacterController _controller;
 	private bool _isMoving;
+	private GameObject _seed;
+
+	private delegate void CoroutineCallback();
 
 	// Use this for initialization
 	void Start () {
@@ -60,11 +63,11 @@ public class Player : MonoBehaviour {
 
 		if (_itemInHand != null) {
 			// place the item
-			StartCoroutine(PlaceItem (hit.point));
+			StartCoroutine(PlaceItem (hit.point, null));
 		} else {
 			// pickup item
 			if (g.tag == "item")
-				StartCoroutine(PickupItem (_gc.GetTopParent (g)));
+				StartCoroutine(PickupItem (_gc.GetTopParent (g), null));
 		}
 
 	}
@@ -84,6 +87,17 @@ public class Player : MonoBehaviour {
 		}
 	}
 
+	public void Plant(GameObject g, RaycastHit h) {
+		if (g.layer == 8) {
+			_seed = _itemInHand;
+			StartCoroutine (PlaceItem (h.point, PlantSeed));
+		}
+	}
+
+	private void PlantSeed() {
+		_seed.GetComponent<Seed> ().Plant ();
+	}
+
 	private void ThrowItem() {
 		_itemInHand.transform.parent = null;
 		_itemInHand.transform.rotation = Quaternion.identity;
@@ -94,7 +108,7 @@ public class Player : MonoBehaviour {
 		_itemInHand = null;
 	}
 
-	private IEnumerator PickupItem(GameObject g) {
+	private IEnumerator PickupItem(GameObject g, CoroutineCallback callback) {
 		_itemInHand = g;
 		g.transform.parent = Hand.transform;
 		foreach (Collider c in g.GetComponentsInChildren<Collider>())
@@ -113,9 +127,11 @@ public class Player : MonoBehaviour {
 		foreach (Collider c in g.GetComponentsInChildren<Collider>())
 			c.enabled = true;
 		r.isKinematic = true;
+		if (callback != null)
+			callback ();
 	}
 
-	private IEnumerator PlaceItem(Vector3 pos) {
+	private IEnumerator PlaceItem(Vector3 pos, CoroutineCallback callback) {
 		GameObject g = _itemInHand;
 		Item item = g.GetComponent<Item> ();
 		if (Physics.OverlapSphere (pos + item.PlacementOffset + item.CheckOffset, item.CheckRadius).Length == 0) {
@@ -137,6 +153,8 @@ public class Player : MonoBehaviour {
 				c.enabled = true;
 			r.isKinematic = false;
 			_itemInHand = null;
+			if (callback != null)
+				callback ();
 		}
 	}
 }

@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour {
 	public float ItemMovementSpeed;
 
 	public GameObject TerraformParticles;
+	public GameObject PlantParticles;
 
 	public int PaintRadius = 5;
 
