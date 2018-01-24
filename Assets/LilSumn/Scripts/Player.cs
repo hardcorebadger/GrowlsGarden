@@ -9,15 +9,28 @@ public class Player : MonoBehaviour {
 	private GameController _gc;
 	private GameObject _itemInHand;
 	private Rigidbody _rigidbody;
+	private Animator _handAnimator;
+	private CharacterController _controller;
+	private bool _isMoving;
 
 	// Use this for initialization
 	void Start () {
 		_gc = GameController.Instance;
 		_rigidbody = GetComponent<Rigidbody> ();
+		_controller = GetComponent<CharacterController> ();
+		_handAnimator = transform.Find("FirstPersonCharacter").Find ("HandParent").Find ("Hand").GetComponent<Animator> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if (Mathf.Abs(Input.GetAxis("Vertical")) > 0.5f && !_isMoving) {
+			_isMoving = true;
+			_handAnimator.SetTrigger ("walk");
+		}
+		if (Mathf.Abs(Input.GetAxis("Vertical")) < 0.5f && _isMoving) {
+			_isMoving = false;
+			_handAnimator.SetTrigger ("idle");
+		}
 		if (Input.GetMouseButtonDown (0)) {
 			RaycastHit hit = GetHit();
 			if (hit.transform != null)
@@ -62,6 +75,7 @@ public class Player : MonoBehaviour {
 		return hit;
 	}
 
+	// item uses
 
 	public void Terraform(GameObject g, RaycastHit h) {
 		// process terraform
