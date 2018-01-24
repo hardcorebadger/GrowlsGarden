@@ -20,7 +20,7 @@ public class Seed : MonoBehaviour {
 
 	public void OnPlanted() {
 		Destroy (gameObject);
-		Instantiate (Sapling, transform.position+Vector3.up*SaplingOffset, Quaternion.identity);
+		Instantiate (Sapling, transform.position+Vector3.up*SaplingOffset, Quaternion.Euler(new Vector3(Random.Range(-5f,5f), Random.Range(0f,360f), Random.Range(-5f,5f))));
 		Instantiate (GameController.Instance.PlantParticles, transform.position, Quaternion.Euler(new Vector3(90,0,0)));
 	}
 		
